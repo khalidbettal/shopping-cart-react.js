@@ -5,7 +5,7 @@
 export const PRODUCTS = [
     {
             id: 1,
-            name: 'lip-gloss',
+            name: 'red-lips ',
             price: 100,
             image: '/src/assets/images/pexels-photo-2533266.webp'
           },
