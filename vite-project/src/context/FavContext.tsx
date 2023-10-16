@@ -1,37 +1,66 @@
-import React from "react";
-import { createContext, useState } from "react";
-import { PRODUCTS } from "../components/items/product";
+
+
+import React, { createContext, useContext, useState } from "react";
+import { ProductContext } from "./ProductContext";
+
+
 
 
 export const FavContext = createContext<any>(null);
 
-const getDefaultedFav = () : any =>{
-   let fav:any = {};
-   for (let i = 1; i <= PRODUCTS.length + 1; i++) {
-      fav[i] = 0;
-   }
-    return fav;
-}
 
-export const FavContextProvider = (props:any) => {
-  const [favorite, setFavorite] = useState<any>( getDefaultedFav() );
 
-  const addFav = (itemId: number) => {
-    return setFavorite((prev: any) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+  
+
+  
+
+
+
+
+// console.log(ProductList().length);
+export const FavContextProvider = ({ children }: any) => {
+
+
+ 
+ 
+
+
+
+
+  const {products} = useContext(ProductContext);
+  
+
+
+
+  const getDefaultedFav = () => {
     
+    const defaultFav: any = {};
+    for (let i = 1; i <=  products.lenght + 1  ; i++) {
+      defaultFav[i] = 0;
+    }
+    return defaultFav;
   };
 
-    const removeFav = (itemId: number) => {
-      return  setFavorite((prev: any) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-    };
 
-    const contextValue = {favorite, addFav, removeFav};
+ 
 
-  //  console.log(favorite)
+  // console.log(ProductList().length);
+  const [favorite, setFavorite] = useState(getDefaultedFav());
+
+
+ const addFav = (itemId: number) => {
+   setFavorite((prev: Array<number>) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+ };
+ 
+ const removeFav = (itemId: number) => {
+   setFavorite((prev: Array<number>) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+ };
+
+  const contextValue = { favorite, addFav, removeFav };
 
   return (
-    <FavContext.Provider value={ contextValue }>
-      {props.children}
+    <FavContext.Provider value={contextValue}>
+      {children}
     </FavContext.Provider>
   );
-}
+};

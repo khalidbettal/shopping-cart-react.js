@@ -1,15 +1,19 @@
 
 import { useContext } from "react";
 import CartProduct from "./items/CartProduct";
-import { PRODUCTS } from "./items/product";
 import { FavContext } from "../context/FavContext";
+import { ProductContext } from "../context/ProductContext";
+
+
 
 
 
 
 
 export const Cart = () =>{
+  const {products} = useContext(ProductContext);
     const {favorite , addFav} = useContext(FavContext);
+  
            
     return(
         <>
@@ -17,7 +21,7 @@ export const Cart = () =>{
         
                <div className='flex flex-wrap justify-center mt-20'>
   <div className='grid grid-cols-1  gap-4'>
-  {PRODUCTS.map((product) => {
+  {products.map((product) => {
     
             const value = favorite[product.id] !== 0;
         

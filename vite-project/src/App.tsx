@@ -8,6 +8,8 @@ import Home from './components/Home';
 import Favorite from './components/Favorite';
 import { FavContextProvider } from './context/FavContext';
 import { Cart } from './components/Cart';
+import { ProductContextProvider } from './context/ProductContext';
+
 
 
 
@@ -18,9 +20,10 @@ import { Cart } from './components/Cart';
 
 function App() {
 
-  
+
   
   return (
+    <ProductContextProvider>
 <FavContextProvider>
     <Router>
       <NavbarDefaul/>
@@ -33,6 +36,7 @@ function App() {
     </Routes>
     </Router>
     </FavContextProvider>
+    </ProductContextProvider>
   );
 }
 
